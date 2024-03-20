@@ -1,13 +1,13 @@
 // traits1.rs
 //
-// Time to implement some traits! Your task is to implement the trait
+// Time to implement实现 some traits! Your task is to implement the trait
 // `AppendBar` for the type `String`. The trait AppendBar has only one function,
 // which appends "Bar" to any object implementing this trait.
 //
 // Execute `rustlings hint traits1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 trait AppendBar {
     fn append_bar(self) -> Self;
@@ -15,6 +15,9 @@ trait AppendBar {
 
 impl AppendBar for String {
     // TODO: Implement `AppendBar` for type `String`.
+    fn append_bar(self) -> Self{
+        self + "Bar"
+    }
 }
 
 fn main() {
@@ -40,3 +43,42 @@ mod tests {
         );
     }
 }
+
+/*
+    // 定义一个名为Animal的trait
+    trait Animal {
+        // 定义一个方法，返回动物的名字
+        fn name(&self) -> &str;
+
+        // 定义一个方法，返回动物的声音
+        fn make_sound(&self) -> &str;
+    }
+
+    // 实现Animal trait的Dog结构体
+    struct Dog {
+        name: String,
+        sound: String,
+    }
+
+    // 为Dog实现Animal trait
+    impl Animal for Dog {
+        fn name(&self) -> &str {
+            &self.name
+        }
+
+        fn make_sound(&self) -> &str {
+            &self.sound
+        }
+    }
+
+    fn main() {
+        let dog = Dog {
+            name: String::from("Doggy"),
+            sound: String::from("Woof"),
+        };
+
+        // 调用Dog实例的方法
+        println!("{} says {}", dog.name(), dog.make_sound());
+    }
+
+*/
