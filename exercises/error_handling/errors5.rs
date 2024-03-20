@@ -2,7 +2,7 @@
 //
 // This program uses an altered version of the code from errors4.
 //
-// This exercise uses some concepts that we won't get to until later in the
+// This exercise uses some concepts概念 that we won't get to until later in the
 // course, like `Box` and the `From` trait. It's not important to understand
 // them in detail right now, but you can read ahead if you like. For now, think
 // of the `Box<dyn ???>` type as an "I want anything that does ???" type, which,
@@ -22,16 +22,16 @@
 // Execute `rustlings hint errors5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 use std::error;
 use std::fmt;
 use std::num::ParseIntError;
 
 // TODO: update the return type of `main()` to make this compile.
-fn main() -> Result<(), Box<dyn ???>> {
+fn main() -> Result<(), Box<dyn error::Error>> {
     let pretend_user_input = "42";
-    let x: i64 = pretend_user_input.parse()?;
+    let x: i64 = pretend_user_input.parse()?;//.parse() 是一个用于将字符串转换为其他类型的方法
     println!("output={:?}", PositiveNonzeroInteger::new(x)?);
     Ok(())
 }
@@ -57,7 +57,7 @@ impl PositiveNonzeroInteger {
     }
 }
 
-// This is required so that `CreationError` can implement `error::Error`.
+// This is required so that `CreationError` can implement实施 `error::Error`.
 impl fmt::Display for CreationError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let description = match *self {
@@ -69,3 +69,61 @@ impl fmt::Display for CreationError {
 }
 
 impl error::Error for CreationError {}
+
+/*
+    {:?} 是 Rust 中用于调试输出的格式化字符串，它会使用 Debug trait 来格式化值。
+    Debug trait 是一个用于打印调试信息的 trait，
+    通常通过 #[derive(Debug)] 来为自定义类型自动生成实现
+        
+        #[derive(Debug)]
+        struct Data {
+            values: [i32; 3],
+        }
+        fn main() {
+            let data = Data { values: [1, 2, 3] };
+
+            println!("{:?}", data); // 输出: Data { values: [1, 2, 3] }
+            println!("{}", data);   // 输出: [I32(1), I32(2), I32(3)]
+        }
+
+    
+    fmt::Display 是为了提供给用户可读的输出，通常用于展示给最终用户看的信息。
+    {:?} 通常用于调试目的，会使用 Debug trait 来格式化输出，输出的信息更详细，更适合程序员查看。
+        
+        struct Point {
+            x: f64,
+            y: f64,
+        }
+        impl fmt::Display for Point {
+            fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+                write!(f, "({}, {})", self.x, self.y)
+            }
+        }
+        fn main() {
+            let point = Point { x: 3.5, y: 4.2 };
+            println!("Display: {}", point);
+        }
+    
+        #[derive(Debug)]
+        struct Point {
+            x: f64,
+            y: f64,
+        }
+        fn main() {
+            let point = Point { x: 3.5, y: 4.2 };
+            println!("Debug: {:?}", point);
+        }
+
+
+    impl Trait for Type语法用于为类型实现特定的Trait。在这种情况下，XXX可以是任何你定义的Trait，
+        trait MyTrait {
+            fn do_something(&self);
+        }
+        struct MyType;
+        impl MyTrait for MyType {
+            fn do_something(&self) {
+                println!("Doing something");
+            }
+        }
+
+*/
