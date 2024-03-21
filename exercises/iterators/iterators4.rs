@@ -3,18 +3,19 @@
 // Execute `rustlings hint iterators4` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 pub fn factorial(num: u64) -> u64 {
-    // Complete this function to return the factorial of num
+    // Complete this function to return the factorial阶乘 of num
     // Do not use:
     // - return
     // Try not to use:
-    // - imperative style loops (for, while)
+    // - imperative style命令式 loops (for, while)
     // - additional variables
     // For an extra challenge, don't use:
-    // - recursion
+    // - recursion递归
     // Execute `rustlings hint iterators4` for hints.
+    (1..=num).fold(1, |acc, x| acc * x)
 }
 
 #[cfg(test)]

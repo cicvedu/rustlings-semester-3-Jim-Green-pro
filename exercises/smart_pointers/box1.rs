@@ -1,12 +1,12 @@
 // box1.rs
 //
 // At compile time, Rust needs to know how much space a type takes up. This
-// becomes problematic for recursive types, where a value can have as part of
+// becomes problematic for recursive递归 types, where a value can have as part of
 // itself another value of the same type. To get around the issue, we can use a
 // `Box` - a smart pointer used to store data on the heap, which also allows us
 // to wrap a recursive type.
 //
-// The recursive type we're implementing in this exercise is the `cons list` - a
+// The recursive type we're implementing实施 in this exercise is the `cons list` - a
 // data structure frequently found in functional programming languages. Each
 // item in a cons list contains two elements: the value of the current item and
 // the next item. The last item is a value called `Nil`.
@@ -18,11 +18,11 @@
 //
 // Execute `rustlings hint box1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+
 
 #[derive(PartialEq, Debug)]
 pub enum List {
-    Cons(i32, List),
+    Cons(i32, Box<List>),
     Nil,
 }
 
@@ -35,11 +35,13 @@ fn main() {
 }
 
 pub fn create_empty_list() -> List {
-    todo!()
+    //todo!()
+    List::Nil
 }
 
 pub fn create_non_empty_list() -> List {
-    todo!()
+    //todo!()
+    List::Cons(1, Box::new(List::Cons(2, Box::new(List::Nil))))
 }
 
 #[cfg(test)]
